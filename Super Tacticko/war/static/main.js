@@ -1,3 +1,4 @@
+var zoom = 0;
 
 $(function() {
 	
@@ -5,7 +6,15 @@ $(function() {
 	$(window).resize(function() {
 		setCellSize();
 	});
-	
+	$(window).bind('mousewheel', function(event, delta, deltaX, deltaY) {
+		event.preventDefault();
+	    zoom += delta;
+	    var zoomScale = 5; // how many pixels the cell enlarges with each zoom point
+	    $('td').height( $('td').first().height() + 1 + (delta*zoomScale) );
+	    console.log($('td').first().height() , zoom, zoomScale);
+		$('table').width( $('table').width() + (width*zoomScale*delta) );
+		return false;
+	});
 	if ( $('body').hasClass('create-page') ) {
 		// add the middle line
 		var half = height / 2; // it has to be zugi anyway
@@ -46,6 +55,7 @@ $(function() {
 		);
 	});
 });
+
 
 
 function setCellSize() {

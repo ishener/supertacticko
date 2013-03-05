@@ -5,8 +5,8 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700,600' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="/static/style.css">
 <link rel="stylesheet" href="/static/fancybox/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/static/jquery.mousewheel.js"></script>
 <script>
 	var width = ${width};
 	var height = ${height};
@@ -32,7 +32,12 @@
 	</tr>
 </c:forEach>  
 </table>
-<button id="save-map" type="button">Save Map</button>
+<div id="rightside">
+	<button id="save-map" type="button">Save Map</button>
+	<div id="all-pawns">
+		
+	</div>
+</div>
 <div style="display:none"><div id="created-map">
 	<h2>Success!</h2>
 	<p>Your map was successfully created.</p>

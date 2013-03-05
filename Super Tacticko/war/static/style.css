@@ -58,6 +58,7 @@ button {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+	float: left;
 }
 tr {
 	
@@ -81,4 +82,8 @@ td.land-td {
 }
 .middle-td {
 	border-bottom: 5px solid rgb(214, 66, 66);
+}
+#rightside {
+	margin: 20px;
+	float: left;
 }
