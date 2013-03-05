@@ -27,7 +27,7 @@
 <c:forEach var="i" begin="0" end="${width-1}">  
 	<tr>
 		<c:forEach var="j" begin="0" end="${height-1}">  
-			<td posx="${i}" posy="${j}" id="${i}x${j}"></td>
+			<td posx="${i}" posy="${j}" id="${i}x${j}" <c:if test="${map[i][j] == 1}">class="land-td"</c:if>></td>
 		</c:forEach>  
 	</tr>
 </c:forEach>  

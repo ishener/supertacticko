@@ -2,10 +2,8 @@ package com.hatzilim;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,12 +13,18 @@ import com.googlecode.objectify.ObjectifyService;
 
 @SuppressWarnings("serial")
 public class CreateMap_Servlet extends HttpServlet {
+	static final int width = 30;
+	static final int height = 30;
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		ObjectifyService.register(Map.class);
+		req.setAttribute("width", width);
+		req.setAttribute("height", height);
 		
-		Map m = ofy().load().type(Map.class).id(4).get();
-		
-		System.out.println(Arrays.deepToString(m.getMap()));
+		req.setAttribute("bodyClass", "create-page");
+		try { 
+			getServletContext().getRequestDispatcher("/game.jsp").forward(req, resp); 
+		} catch (ServletException e) {
+			System.out.println (e.getMessage());
+		}
 	}
 	
 	
@@ -29,7 +33,6 @@ public class CreateMap_Servlet extends HttpServlet {
 			ObjectifyService.register(Map.class);
 			
 			int[][] newMap = new int[0][0];
-//			List<List<Integer>> newMap = new ArrayList<List<Integer>>();
 			Gson gson = new Gson();
 			newMap = gson.fromJson (req.getParameter("map"), newMap.getClass());
 			Map map = new Map (newMap);
@@ -39,7 +42,6 @@ public class CreateMap_Servlet extends HttpServlet {
 			resp.setContentType("text/plain");
 			resp.getWriter().println( map.getId() );
 			
-//			System.out.println( Arrays.deepToString(map.getMap()) );
 		}
 	}
 }

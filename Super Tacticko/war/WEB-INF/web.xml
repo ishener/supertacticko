@@ -5,7 +5,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Super_Tacticko</servlet-name>
-		<url-pattern>/super_tacticko</url-pattern>
+		<url-pattern>/game/*</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>CreateMap</servlet-name>

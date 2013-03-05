@@ -1,0 +1,12 @@
+when a user lands:
+
+- start a new game
+	- default map
+	- other map 
+		- create
+		- browse
+		- saved maps
+	-- after map choose:
+		- invite a friend
+		- look for a random
+- join a game, random or enter id
