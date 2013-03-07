@@ -86,4 +86,34 @@ td.land-td {
 #rightside {
 	margin: 20px;
 	float: left;
+	width: 320px;
+}
+#rightside #all-pawns-start .pawn-box {
+	margin-bottom: 10px;
+overflow: hidden;
+float: left;
+width: 80px;
+text-align: center;
+height: 60px;
+}
+#rightside #all-pawns-start .pawn-box img {
+	width: 40px;
+	cursor: pointer;
+}
+#rightside #all-pawns-start .pawn-name {
+	text-transform: capitalize;
+font-weight: bold;
+clear: both;
+font-size: 12px;
+}
+#rightside #all-pawns-start .pawn-desc {
+	display: none;
+}
+#all-pawns-start h2 {
+	text-align: center;
+	margin-bottom: 12px;
+	font-size: 16px;
+}
+.create-page #all-pawns-start {
+	display: none;
 }

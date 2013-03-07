@@ -1,4 +1,6 @@
 var zoom = 0;
+var newGame = true;
+var localUserPawns;
 
 $(function() {
 	
@@ -6,6 +8,8 @@ $(function() {
 	$(window).resize(function() {
 		setCellSize();
 	});
+	if (newGame) startLayout();
+	
 	$(window).bind('mousewheel', function(event, delta, deltaX, deltaY) {
 		event.preventDefault();
 	    zoom += delta;
@@ -84,4 +88,12 @@ function getWindowSize() {
 	}
 
 	return [winW,winH];
+}
+
+function startLayout() {
+	localUserPawns = new pawnSet();
+	$pawnsBox = $('#all-pawns-start');
+	for (var i=0; i < localUserPawns.pawns.length; i++) {
+		$pawnsBox.append ( localUserPawns.pawns[i].createForPawnBox() );
+	}
 }

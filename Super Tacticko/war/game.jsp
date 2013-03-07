@@ -18,6 +18,7 @@
 		}
 	}
 </script>
+<script src="/static/gamedata.js"></script>
 <script src="/static/main.js"></script>
 <script type="text/javascript" src="/static/fancybox/jquery.fancybox.pack.js?v=2.1.4"></script>
 </head>
@@ -34,8 +35,8 @@
 </table>
 <div id="rightside">
 	<button id="save-map" type="button">Save Map</button>
-	<div id="all-pawns">
-		
+	<div id="all-pawns-start">
+		<h2>Drag and drop the pawns in the board.</h2>
 	</div>
 </div>
 <div style="display:none"><div id="created-map">
