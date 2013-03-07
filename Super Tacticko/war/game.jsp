@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/static/style.css">
 <link rel="stylesheet" href="/static/fancybox/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
 <script src="/static/jquery.mousewheel.js"></script>
 <script>
 	var width = ${width};

@@ -9,6 +9,19 @@ $(function() {
 		setCellSize();
 	});
 	if (newGame) startLayout();
+	$( "#all-pawns-start .pawn-box img" ).draggable({ 
+		revert: 'valid',
+		snap: "td",
+		snapModeType: "inner",
+		start: function( event, ui ) {
+			ui.helper.width( $('td').width() ).height( $('td').height() );
+		}
+	});
+	$('td').droppable({
+		drop: function( event, ui ) {
+	        ui.draggable.appendTo (this);
+	    }
+	});
 	
 	$(window).bind('mousewheel', function(event, delta, deltaX, deltaY) {
 		event.preventDefault();
