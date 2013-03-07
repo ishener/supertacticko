@@ -116,3 +116,6 @@ font-size: 12px;
 .create-page #all-pawns-start {
 	display: none;
 }
+td img {
+	width: 100% !important;
+}

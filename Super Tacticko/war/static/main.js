@@ -11,8 +11,12 @@ $(function() {
 	if (newGame) startLayout();
 	$( "#all-pawns-start .pawn-box img" ).draggable({ 
 		revert: 'valid',
+		revertDuration: 0,
 		snap: "td",
 		snapModeType: "inner",
+		start: function( event, ui ) {
+			ui.helper.width( $('td').width() ).height( $('td').height() );
+		}
 		start: function( event, ui ) {
 			ui.helper.width( $('td').width() ).height( $('td').height() );
 		}
@@ -79,7 +83,7 @@ function setCellSize() {
 	var windowSize = getWindowSize();
 	var minScale = Math.min(windowSize[0], windowSize[1]);
 	var cellSize = Math.floor(minScale / width);
-	$('td').height(cellSize - 1);
+	$('td').height(cellSize - 1).width(cellSize + 5);
 	$('table').width(minScale + width*5);
 }
 
