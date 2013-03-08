@@ -29,7 +29,7 @@
 <c:forEach var="i" begin="0" end="${width-1}">  
 	<tr>
 		<c:forEach var="j" begin="0" end="${height-1}">  
-			<td posx="${i}" posy="${j}" id="${i}x${j}" <c:if test="${map[i][j] == 1}">class="land-td"</c:if>></td>
+			<td posx="${j}" posy="${i}" id="${i}x${j}" <c:if test="${map[i][j] == 1}">class="land-td"</c:if>></td>
 		</c:forEach>  
 	</tr>
 </c:forEach>  
@@ -38,6 +38,7 @@
 	<button id="save-map" type="button">Save Map</button>
 	<div id="all-pawns-start">
 		<h2>Drag and drop the pawns in the board.</h2>
+		<button id="ready-game" type="button">Ready</button>
 	</div>
 </div>
 <div style="display:none"><div id="created-map">

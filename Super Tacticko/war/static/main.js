@@ -9,21 +9,38 @@ $(function() {
 		setCellSize();
 	});
 	if (newGame) startLayout();
-	$( "#all-pawns-start .pawn-box img" ).draggable({ 
-		revert: 'valid',
+	$( ".pawn-img" ).draggable({ 
+		revert: 'invalid',
 		revertDuration: 0,
-		snap: "td",
-		snapModeType: "inner",
+		cursor: 'pointer',
+		cursorAt: {
+			top: $('td').height() / 2,
+			left: $('td').width() / 2
+		},
 		start: function( event, ui ) {
 			ui.helper.width( $('td').width() ).height( $('td').height() );
-		}
-		start: function( event, ui ) {
-			ui.helper.width( $('td').width() ).height( $('td').height() );
+			ui.helper.removeClass('inside-td');
+		},
+		stop: function( event, ui ) {
+			ui.helper.width( 40 ).height( 'auto' );
 		}
 	});
-	$('td').droppable({
+	$('td:not(.td-disabled)').droppable({
+		hoverClass: "ui-state-active",
 		drop: function( event, ui ) {
+			if (ui.draggable.parent().hasClass('pawn-box'))
+				ui.draggable.parent().hide();
 	        ui.draggable.appendTo (this);
+	        localUserPawns.pawns[ui.draggable.attr('serial')].setPos(
+	        	$(this).attr('posx'),
+	        	$(this).attr('posy')
+	        );
+	        ui.draggable.addClass('inside-td');
+	        if ($('.pawn-box:visible').length == 0) {
+	        	// finished placing pawns. show ready button
+	        	$('#ready-game').show();
+	        	$('#all-pawns-start h2').html('Review your board, and click ready');
+	        }
 	    }
 	});
 	
@@ -83,8 +100,8 @@ function setCellSize() {
 	var windowSize = getWindowSize();
 	var minScale = Math.min(windowSize[0], windowSize[1]);
 	var cellSize = Math.floor(minScale / width);
-	$('td').height(cellSize - 1).width(cellSize + 5);
-	$('table').width(minScale + width*5);
+	$('td').height(cellSize - 1).width(cellSize - 1);
+	$('table').width(minScale + width);
 }
 
 function getWindowSize() {
@@ -108,9 +125,14 @@ function getWindowSize() {
 }
 
 function startLayout() {
+	// initialize the local user pawns
 	localUserPawns = new pawnSet();
 	$pawnsBox = $('#all-pawns-start');
 	for (var i=0; i < localUserPawns.pawns.length; i++) {
 		$pawnsBox.append ( localUserPawns.pawns[i].createForPawnBox() );
 	}
+	
+	// for setting the local board, disable the top table
+	$('td').slice(0, 450).addClass('td-disabled');
+//	$('td').slice(450).css('background-color', 'black')
 }
