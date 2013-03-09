@@ -60,9 +60,10 @@ $(function() {
 		$middle.find('td').addClass('middle-td');
 		$middle.next().find('td').css('border-bottom', '0');
 	}
+	$('.share-input').click(function() { $(this).select(); });
 	$('.create-page td').click(function() {
-		var row = $(this).attr('posx');
-		var col = $(this).attr('posy');
+		var row = $(this).attr('posy');
+		var col = $(this).attr('posx');
 		var mirrorRow = width - 1 - row;
 		if ( mapData[row][col] === 1 ) {
 			mapData[row][col] = 0;
@@ -92,8 +93,31 @@ $(function() {
 				}
 		);
 	});
+	
+	if ( remoteStatus == 'invite' ) {
+		$('#status-box').append('<p>Invite a friend with this link: ' + document.URL + '</p>')
+			.append('<p>You will be notified when your friend arrives</p>');
+		
+		$('#share-link-p .share-input').val(document.URL).select();
+		$.fancybox({
+			'href' : '#invite-popup',
+			'closeBtn' : false,
+			'afterClose' : function() {
+				console.log('fancybox closed');
+			}
+		});
+	}
 });
 
+function postStatus(m) {
+	var d = new Date();
+	var time = ('0' + d.getHours()).slice(-2) + ':'
+    	+ ('0' + d.getMinutes()).slice(-2) + ':'
+    	+ ('0' + d.getSeconds()).slice(-2);
+	var $statusBox = $('#status-box');
+	$statusBox.append('<p>' + time + ' - ' + m + '</p>');
+	$statusBox.scrollTop( $statusBox.outerHeight() );
+}
 
 
 function setCellSize() {

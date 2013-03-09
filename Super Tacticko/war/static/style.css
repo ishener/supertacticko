@@ -51,6 +51,7 @@ line-height: 30px;
 p {
 	line-height: 18px;
 	font-size: 14px;
+	margin: 5px 0;
 }
 button {
 	margin: 10px 0;
@@ -145,4 +146,26 @@ td .pawn-img.ui-draggable-dragging {
 }
 #ready-game {
 	display: none;
+}
+#invite-popup {
+	width: 400px;
+}
+.share-input {
+	width: 90%;
+padding: 5px;
+font-family: 'Open Sans', sans-serif;
+}
+#status-box {
+	clear: both;
+height: 120px;
+border: 1px solid grey;
+padding: 6px;
+overflow-y: scroll;
+word-wrap: break-word;
+margin-top: 20px;
+}
+#status-box p {
+	font-size: 12px;
+	line-height: 16px;
+margin: 2px;
 }
