@@ -25,7 +25,7 @@ function Pawn(id, name) {
 	
 	this.createForPawnBox = function () {
 		var str = '<div class="pawn-box" id="pawn-box-' + this.id + '">';
-		str += 	  	'<img class="pawn-img" src="/static/images/' + this.name + '.png" id="pawn-' + 
+		str += 	  	'<img class="pawn-img pawn-img-draggable" src="/static/images/' + this.name + '.png" id="pawn-' + 
 					this.id + '" serial="' + this.id + '" />';
 		str +=		'<p class="pawn-name">' + this.name + '</p>';
 		str +=		'<p class="pawn-desc">' + pawnData[0][2] + '</p>'; // TODO: fix the description
@@ -40,6 +40,7 @@ function Pawn(id, name) {
 }
 
 function pawnSet() {
+	this.ready = false;
 	this.pawns = new Array();
 	var c = 0;
 	for ( var i=0; i < pawnData.length; i++ ) {

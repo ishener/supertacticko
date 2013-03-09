@@ -9,6 +9,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
 <script src="/static/jquery.mousewheel.js"></script>
+<script src="/static/functions.js"></script>
 <script src="/static/gamedata.js"></script>
 <script src="/static/main.js"></script>
 <script src="/static/channel.js"></script>
@@ -25,8 +26,10 @@
 	
 	var remoteStatus = "${remoteStatus}";
 	var token = "${token}";
+	var clientId = "${clientId}";
 	$(function() { setTimeout(initialize, 100); }) // we use jquery in our ajax to the channel
 </script>
+<script src="/static/test.js"></script>
 <script type="text/javascript" src="/static/fancybox/jquery.fancybox.pack.js?v=2.1.4"></script>
 </head>
 
@@ -35,7 +38,7 @@
 <c:forEach var="i" begin="0" end="${width-1}">  
 	<tr>
 		<c:forEach var="j" begin="0" end="${height-1}">  
-			<td posx="${j}" posy="${i}" id="${i}x${j}" <c:if test="${map[i][j] == 1}">class="land-td"</c:if>></td>
+			<td posx="${j}" posy="${i}" id="td${j}x${i}" <c:if test="${map[i][j] == 1}">class="land-td"</c:if>></td>
 		</c:forEach>  
 	</tr>
 </c:forEach>  
@@ -44,11 +47,29 @@
 	<button id="save-map" type="button">Save Map</button>
 	<div id="all-pawns-start">
 		<h2>Drag and drop the pawns in the board.</h2>
-		<button id="ready-game" type="button">Ready</button>
+	</div>
+	<div id="ready-game">
+		<h2>Review your board, and click ready.</h2>
+		<button id="ready-game-button" type="button">Ready</button>
+		<p id="ready-message">Please wait until your friend is ready</p>
+	</div>
+	<div id="game-status">
+		<div id="remote-turn">
+			<h2>It's your friend's turn.</h2>
+		</div>
+		<div id="local-turn">
+			<h2>It's your turn.</h2>
+		</div>
 	</div>
 	<div style="clear:both"></div>
 	<div id="status-box">
 		
+	</div>
+	<div id="chat-box">
+		<form id="chat-form">
+		<input type="text" class="chat-input" placeholder="Chat..." />
+		<input type="submit" id="chat-button" value="Send" />
+		</form>
 	</div>
 </div>
 <div style="display:none"><div id="created-map">

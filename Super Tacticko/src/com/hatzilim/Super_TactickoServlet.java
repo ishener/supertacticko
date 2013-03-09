@@ -38,7 +38,7 @@ public class Super_TactickoServlet extends HttpServlet {
 			String gamekey = path[2];
 			Game g = ofy().load().type(Game.class).id(Long.parseLong(gamekey)).get();
 			
-			if (g.getPlayer1() == null) {
+			if (g == null) {
 				// invalid game
 				resp.setStatus(401);
 				return;
@@ -46,7 +46,8 @@ public class Super_TactickoServlet extends HttpServlet {
 			
 			String token = channelService.createChannel( clientId );
 			req.setAttribute("token", token);
-			System.out.println("create token " + token);
+			req.setAttribute("clientId", clientId);
+			System.out.println("created token " + token);
 			
 			String remoteStatus = null;
 			if ( g.getPlayer1().equals(clientId) ) {
@@ -57,19 +58,27 @@ public class Super_TactickoServlet extends HttpServlet {
 					// the two players are already playing...
 					// TODO: make a feature to save the game
 				}
-				
+				req.setAttribute("map", g.getMap().getMap());
 			} else {
-				if (g.getPlayer2() == null) {
+				if (g.getPlayer2() == null || g.getPlayer2().equals(clientId)) {
 					// the user is the invited. set things up
 					remoteStatus = "joined";
+					g.setPlayer2(clientId);
+					g.setWhoseTurn(clientId);
+					g.updateState(clientId, "joined");
+					
+//					if (g.getPlayer2() == null)
+						ofy().save().entity(g).now();
+					
 				} else {
-					// the user is a viewer or player 2
+					// the user is a viewer 
 				}
+				req.setAttribute("map", g.getMap().getReversedMap());
 			}
 				
 			
-			Map map = g.getMap();
-			req.setAttribute("map", map.getMap());
+//			Map map = g.getMap();
+//			req.setAttribute("map", map.getMap());
 			req.setAttribute("remoteStatus", remoteStatus);
 			try { 
 				getServletContext().getRequestDispatcher("/game.jsp").forward(req, resp); 
@@ -102,11 +111,20 @@ public class Super_TactickoServlet extends HttpServlet {
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		System.out.println("got data: " + req.getParameter("data"));
-		
-		String userAgent = req.getHeader("User-Agent");
-		ChannelService channelService = ChannelServiceFactory.getChannelService();
-	    String channelKey = req.getRemoteAddr() + userAgent.toLowerCase().indexOf("chrome");
-	    channelService.sendMessage(new ChannelMessage(channelKey, "a test message to client"));
+		try {
+			ObjectifyService.register(Map.class);
+			ObjectifyService.register(Game.class);
+			
+			String action = req.getParameter("action");
+			String gamekey = req.getParameter("gamekey");
+			String clientId = req.getParameter("player");
+			
+			Game g = ofy().load().type(Game.class).id(Long.parseLong(gamekey)).get();
+			g.updateState(clientId, action);
+			
+		} catch (NullPointerException e) {
+			// bad request
+			System.out.println (e.getMessage());
+		}
 	}
 }

@@ -89,8 +89,8 @@ td.ui-state-active {
 	opacity: 0.5;
 }
 td.td-disabled {
-	zoom: 1;
-	filter: alpha(opacity=40);
+/* 	zoom: 1; */
+/* 	filter: alpha(opacity=40); */
 	opacity: 0.4;
 }
 .middle-td {
@@ -99,24 +99,24 @@ td.td-disabled {
 #rightside {
 	margin: 20px;
 	float: left;
-	width: 320px;
+	width: 350px;
 }
 #rightside #all-pawns-start .pawn-box {
 	margin-bottom: 10px;
 float: left;
-width: 80px;
+width: 70px;
 text-align: center;
-height: 60px;
+height: 50px;
 }
 #rightside #all-pawns-start .pawn-box img {
-	width: 40px;
+	width: 30px;
 	cursor: pointer;
 }
 #rightside #all-pawns-start .pawn-name {
 	text-transform: capitalize;
-font-weight: bold;
 clear: both;
 font-size: 12px;
+margin-top: 0;
 }
 #rightside #all-pawns-start .pawn-desc {
 	display: none;
@@ -168,4 +168,13 @@ margin-top: 20px;
 	font-size: 12px;
 	line-height: 16px;
 margin: 2px;
+}
+#ready-game, #ready-message {
+	display: none;
+}
+#game-status, #remote-turn, #game-status.remote #local-turn {
+	display: none;
+}
+#game-status.remote #remote-turn {
+	display: block;
 }

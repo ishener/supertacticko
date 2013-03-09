@@ -37,4 +37,15 @@ public class Map {
 	public void setMap(int[][] map) {
 		this.map = map;
 	}
+	
+	public int[][] getReversedMap () {
+		int len = map.length;
+		int[][] newMap = new int[len][len];
+		for (int i = 0; i < len; i++) {
+			for (int j = 0; j < len; j++) {
+				newMap[i][j] = map[len - i - 1][len - j - 1];
+			}
+		}
+		return newMap;
+	}
 }
