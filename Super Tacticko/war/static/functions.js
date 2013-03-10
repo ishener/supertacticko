@@ -27,3 +27,7 @@ function getWindowSize() {
 
 	return [winW,winH];
 }
+
+function reversePos (x) {
+	return width - x - 1;
+}

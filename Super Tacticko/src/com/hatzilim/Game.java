@@ -77,7 +77,7 @@ public class Game {
 	/* 
 	 * every update consists of:
 	 * 1. storing the update in the log
-	 * 2. notifying the 2 players. (the acting player gets a cofirmation)
+	 * 2. notifying the 2 players. (the acting player gets a confirmation)
 	 */
 	public void updateState (String player, String action) {
 		String message = player + "/" + action;

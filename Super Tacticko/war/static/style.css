@@ -178,3 +178,6 @@ margin: 2px;
 #game-status.remote #remote-turn {
 	display: block;
 }
+td.justmoved {
+	border: 2px solid red;
+}

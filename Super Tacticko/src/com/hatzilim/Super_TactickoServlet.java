@@ -119,6 +119,8 @@ public class Super_TactickoServlet extends HttpServlet {
 			String gamekey = req.getParameter("gamekey");
 			String clientId = req.getParameter("player");
 			
+			System.out.println("updating status. action: " + action);
+			
 			Game g = ofy().load().type(Game.class).id(Long.parseLong(gamekey)).get();
 			g.updateState(clientId, action);
 			
